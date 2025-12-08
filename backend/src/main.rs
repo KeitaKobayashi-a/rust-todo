@@ -11,18 +11,27 @@ use axum::{
     Json, Router,
 };
 use serde::{Deserialize, Serialize};
+use tower_http::trace::TraceLayer;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[tokio::main]
 async fn main() {
     // initialize tracing
-    tracing_subscriber::fmt::init();
+   tracing_subscriber::registry()
+       .with(
+           tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| {
+               format!("{}=debug,tower_http=debug", env!("CARGO_CRATE_NAME")).into()
+           }),
+       )
+       .with(tracing_subscriber::fmt::layer())
+       .init();
 
     // build our application with a route
     let app = Router::new()
         // `GET /` goes to `root`
-        .route("/tasks", get(get_all_task))
+        .route("/tasks", get(get_all_task)).layer(TraceLayer::new_for_http())
         // `POST /users` goes to `create_user`
-        .route("/tasks", post(create_task));
+        .route("/tasks", post(create_task)).layer(TraceLayer::new_for_http());
 
     // run our app with hyper
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
