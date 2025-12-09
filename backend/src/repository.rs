@@ -1,22 +1,22 @@
-use crate::models:Todo;
-use crate::interface::ToDoRepository;
+use crate::models::Todo;
+use crate::interface::TodoRepository;
 use crate::db::DbPool;
 use async_trait::async_trait;
 use uuid::Uuid;
 
 #[derive(Clone)]
-pub struct ToDoRepositoryImpl {
+pub struct TodoRepositoryImpl {
     pub pool: DbPool
     }
 
-impl ToDoRepositoryImpl{
+impl TodoRepositoryImpl{
     pub fn new(pool: DbPool) -> Self{
         Self{pool}
         }
     }
 
 #[async_trait]
-impl ToDoRepository for ToDoRepositoryImpl{
+impl TodoRepository for TodoRepositoryImpl{
     async fn find_all(&self) -> Result<Vec<Todo>, sqlx::Error>{
         let todos = sqlx::query_as::<_, Todo>(
             "SELECT id, title, description, completed, created_at, updated_at FROM todos")

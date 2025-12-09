@@ -4,11 +4,11 @@ use async_trait::async_trait;
 use uuid:: Uuid;
 
 #[derive(Clone)]
-pub struct TodoService<T: TodoRepository + Clone> {
+pub struct TodoUsecase<T: TodoRepository + Clone> {
     repository: T,
     }
 
-impl<T: TodoRepository + Clone> TodoService<T>{
+impl<T: TodoRepository + Clone> TodoUsecase<T>{
     pub fn new(repository: T) -> Self{
         Self{repository}}
     }
