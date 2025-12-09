@@ -18,3 +18,14 @@ pub trait TodoService{
     async fn get_all_todos(&self) -> Result<Vec<Todo>, sqlx::Error>;
     async fn get_todo_by_id(&self, id: Uuid) -> Result<Option<Todo>, sqlx::Error>;
     }
+
+#[async_trait]
+impl<T: TodoRepository + Send + Sync + Clone> TodoService for TodoUsecase<T> {
+    async fn get_all_todos(&self) -> Result<Vec<Todo>, sqlx::Error> {
+        self.repository.find_all().await
+    }
+
+    async fn get_todo_by_id(&self, id: Uuid) -> Result<Option<Todo>, sqlx::Error> {
+        self.repository.find_by_id(id).await
+    }
+}
