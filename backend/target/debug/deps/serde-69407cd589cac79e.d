@@ -1,0 +1,12 @@
+/Users/kobayashi/Documents/BTC/presentation/rust-todo/backend/target/debug/deps/serde-69407cd589cac79e.d: /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /Users/kobayashi/Documents/BTC/presentation/rust-todo/backend/target/debug/build/serde-e3d2ca0fe7aaa51b/out/private.rs
+
+/Users/kobayashi/Documents/BTC/presentation/rust-todo/backend/target/debug/deps/libserde-69407cd589cac79e.rmeta: /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /Users/kobayashi/Documents/BTC/presentation/rust-todo/backend/target/debug/build/serde-e3d2ca0fe7aaa51b/out/private.rs
+
+/Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/Users/kobayashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/Users/kobayashi/Documents/BTC/presentation/rust-todo/backend/target/debug/build/serde-e3d2ca0fe7aaa51b/out/private.rs:
+
+# env-dep:OUT_DIR=/Users/kobayashi/Documents/BTC/presentation/rust-todo/backend/target/debug/build/serde-e3d2ca0fe7aaa51b/out
