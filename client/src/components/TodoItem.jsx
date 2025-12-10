@@ -25,7 +25,7 @@ export default function TodoItem({todo, removeTodo, toggleTodo, setIsSubmit}) {
             disablePadding
         >
             <ListItemButton role={undefined} onClick={() => toggleTodo(todo.id)}>
-                <ListItemIcon >
+                <ListItemIcon>
                     <Checkbox
                         edge="start"
                         checked={todo.completed}
@@ -39,7 +39,7 @@ export default function TodoItem({todo, removeTodo, toggleTodo, setIsSubmit}) {
                         fontSize: 32,
                         fontWeight: 600,
                     },
-                }} sx={{color: 'white'}}/>
+                }}  sx={todo.completed ? {color: '#00a6ed', textDecoration: "line-through"}:{color: 'white'}}/>
             </ListItemButton>
         </ListItem>
 
