@@ -8,26 +8,31 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TodoItem({todo, removeTodo, toggleTodo}) {
     const labelId = `checkbox-list-label-${todo.id}`;
-    return(
+    return (
         <ListItem
             secondaryAction={
                 <IconButton edge="end" aria-label="comments" onClick={removeTodo}>
-                    <DeleteIcon />
+                    <DeleteIcon/>
                 </IconButton>
             }
             disablePadding
         >
-            <ListItemButton role={undefined}  dense onClick={() => toggleTodo(todo.id)}>
+            <ListItemButton role={undefined} onClick={() => toggleTodo(todo.id)}>
                 <ListItemIcon>
                     <Checkbox
                         edge="start"
                         checked={todo.completed}
                         tabIndex={-1}
                         disableRipple
-                        inputProps={{ "aria-labelledby": labelId }}
+                        inputProps={{"aria-labelledby": labelId}}
                     />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={todo.title} sx={{color:'white'}}/>
+                <ListItemText id={labelId} primary={todo.title} primaryTypographyProps={{
+                    sx: {
+                        fontSize: 32,
+                        fontWeight: 600,
+                    },
+                }} sx={{color: 'white'}}/>
             </ListItemButton>
         </ListItem>
 

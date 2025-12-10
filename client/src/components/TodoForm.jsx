@@ -1,34 +1,44 @@
 import ListItem from "@mui/material/ListItem";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import {useState} from "react";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Create } from "@mui/icons-material";
+import {Create} from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 
-export default function TodoForm({addTodo}) {
+export default function TodoForm({addTodo, setIsSubmit}) {
     const [text, setText] = useState("");
     const handleChange = (evt) => setText(evt.target.value);
-    const handleSubmit = evt => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
         addTodo(text);
         setText('')
+        const data = await fetch('/api/todos', {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }, body:
+                JSON.stringify({title: text, description: 'not use'})
+        })
+        setIsSubmit(pre => !pre)
+
     }
 
     return (
-        <ListItem>
+        <ListItem sx={{width: '100%'}}>
             <form onSubmit={handleSubmit}>
                 <TextField
                     id="outlined-basic"
-                    label="新規追加"
+                    label="new Todo"
                     variant="outlined"
                     value={text}
                     onChange={handleChange}
+
                     slotProps={{
                         input: {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton aria-label="create todo" edge="end" type="submit">
-                                        <Create />
+                                        <Create/>
                                     </IconButton>
                                 </InputAdornment>
                             ),

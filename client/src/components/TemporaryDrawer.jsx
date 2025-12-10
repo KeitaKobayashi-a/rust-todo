@@ -32,7 +32,7 @@ export default function TemporaryDrawer() {
                             <ListItemIcon>
                                 <Brightness1Icon/>
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText primary={text} sx={{color:'#00a6ed'}}/>
                         </ListItemButton>
                     </ListItem>
                 ))}

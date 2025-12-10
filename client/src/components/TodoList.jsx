@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 
 export default function TodoList() {
     const [todos, setTodos] = React.useState([]);
+    const [isSubmit, setIsSubmit] = React.useState(false)
     useEffect(
         () => {
             localStorage.setItem('todos', JSON.stringify(todos))
@@ -24,7 +25,7 @@ export default function TodoList() {
             setTodos(json)
         }
         getInitialData()
-    }, []);
+    }, [isSubmit]);
 
     const removeTodo = id => {
         setTodos(pre => pre.filter(t => t.id !== id))
@@ -44,6 +45,8 @@ export default function TodoList() {
         return [...pre, {text, id: crypto.randomUUID(), completed: false}]
     });
 
+
+
     return (
         <Box sx={{
             display: 'flex', justifyContent: 'center',
@@ -54,11 +57,11 @@ export default function TodoList() {
                 Todo
             </Typography>
 
-            <List sx={{width: "100%", maxWidth: 360, bgcolor: "background.paper"}}>
+            <List sx={{width: "100%", maxWidth: 600, Height:800, bgcolor: "background.paper"}}>
                 {todos.map(todo => <TodoItem key={todo.id} todo={todo} removeTodo={() => removeTodo(todo.id)}
                                              toggleTodo={toggleTodo}/>
                 )}
-                <TodoForm addTodo={addTodo}/>
+                <TodoForm addTodo={addTodo} setIsSubmit={setIsSubmit}/>
             </List>
         </Box>
     );
