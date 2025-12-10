@@ -6,12 +6,19 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function TodoItem({todo, removeTodo, toggleTodo}) {
+export default function TodoItem({todo, removeTodo, toggleTodo, setIsSubmit}) {
     const labelId = `checkbox-list-label-${todo.id}`;
+    const deleteTodo = async () => {
+        await fetch(`/api/todos/${todo.id}`, {method: 'DELETE'})
+        setIsSubmit(pre => !pre)
+    }
     return (
         <ListItem
             secondaryAction={
-                <IconButton edge="end" aria-label="comments" onClick={removeTodo}>
+                <IconButton edge="end" aria-label="comments" onClick={() => {
+                    deleteTodo();
+                    removeTodo(todo.id)
+                }}>
                     <DeleteIcon/>
                 </IconButton>
             }

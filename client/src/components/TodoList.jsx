@@ -59,7 +59,7 @@ export default function TodoList() {
 
             <List sx={{width: "100%", maxWidth: 600, Height:800, bgcolor: "background.paper"}}>
                 {todos.map(todo => <TodoItem key={todo.id} todo={todo} removeTodo={() => removeTodo(todo.id)}
-                                             toggleTodo={toggleTodo}/>
+                                             toggleTodo={toggleTodo} setIsSubmit={setIsSubmit}/>
                 )}
                 <TodoForm addTodo={addTodo} setIsSubmit={setIsSubmit}/>
             </List>
