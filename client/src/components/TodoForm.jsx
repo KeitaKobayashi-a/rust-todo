@@ -24,15 +24,15 @@ export default function TodoForm({addTodo, setIsSubmit}) {
     }
 
     return (
-        <ListItem sx={{width: '100%'}}>
-            <form onSubmit={handleSubmit}>
+        <ListItem >
+            <form onSubmit={handleSubmit}style={{ width: "80%" }}>
                 <TextField
                     id="outlined-basic"
                     label="new Todo"
                     variant="outlined"
                     value={text}
                     onChange={handleChange}
-
+                    fullWidth
                     slotProps={{
                         input: {
                             endAdornment: (
