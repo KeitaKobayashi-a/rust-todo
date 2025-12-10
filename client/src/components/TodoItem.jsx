@@ -27,7 +27,7 @@ export default function TodoItem({todo, removeTodo, toggleTodo}) {
                         inputProps={{ "aria-labelledby": labelId }}
                     />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={todo.text} />
+                <ListItemText id={labelId} primary={todo.title} sx={{color:'white'}}/>
             </ListItemButton>
         </ListItem>
 
