@@ -33,4 +33,30 @@ impl TodoRepository for TodoRepositoryImpl{
             .await?;
             Ok(todo)
         }
+
+    async fn create(&self, todo: Todo) -> Result<Todo, sqlx::Error> {
+        let created_todo = sqlx::query_as::<_, Todo>(
+            "INSERT INTO todos (id, title, description, completed, created_at, updated_at)
+             VALUES ($1, $2, $3, $4, $5, $6)
+             RETURNING id, title, description, completed, created_at, updated_at"
+        )
+            .bind(todo.id)
+            .bind(&todo.title)
+            .bind(&todo.description)
+            .bind(todo.completed)
+            .bind(todo.created_at)
+            .bind(todo.updated_at)
+            .fetch_one(&self.pool)
+            .await?;
+        Ok(created_todo)
     }
+
+    async fn delete(&self, id: Uuid) -> Result<(), sqlx::Error> {
+        sqlx::query("DELETE FROM todos WHERE id = $1")
+            .bind(id)
+            .execute(&self.pool)
+            .await?;
+        Ok(())
+    }
+
+}
