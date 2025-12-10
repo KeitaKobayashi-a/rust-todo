@@ -12,6 +12,9 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ButtonAppBar from "./ButtonAppBar.jsx";
 import Brightness1Icon from '@mui/icons-material/Brightness1';
+import TodoList from "./TodoList.jsx";
+import {theme} from "./theme/theme.js";
+import Toolbar from "@mui/material/Toolbar";
 
 export default function TemporaryDrawer() {
     const [open, setOpen] = React.useState(false);
@@ -39,11 +42,16 @@ export default function TemporaryDrawer() {
     );
 
     return (
-        <div>
+        <Box sx={{
+            minHeight:'100vh',
+            bgcolor: theme.palette.background.default
+        }}>
             <ButtonAppBar setOpen={setOpen}/>
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>
-        </div>
+            <Toolbar/>
+            <TodoList/>
+        </Box>
     );
 }
