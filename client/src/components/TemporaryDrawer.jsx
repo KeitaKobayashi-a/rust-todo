@@ -11,6 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ButtonAppBar from "./ButtonAppBar.jsx";
+import Brightness1Icon from '@mui/icons-material/Brightness1';
 
 export default function TemporaryDrawer() {
     const [open, setOpen] = React.useState(false);
@@ -22,11 +23,11 @@ export default function TemporaryDrawer() {
     const DrawerList = (
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Todo', 'Search', 'Create', 'Delete'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                <Brightness1Icon/>
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -34,25 +35,12 @@ export default function TemporaryDrawer() {
                 ))}
             </List>
             <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
         </Box>
     );
 
     return (
         <div>
             <ButtonAppBar setOpen={setOpen}/>
-            <Button onClick={toggleDrawer(true)}>Open drawer</Button>
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>
