@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Header from "./Header"
 
 export default function BoxBasic() {
   return (
@@ -9,10 +10,9 @@ export default function BoxBasic() {
         overflow: "hidden",
         height: "100vh",
         width: "100%",
-        bgcolor: 'red'
       }}
     >
-      This Box renders as an HTML section element.
+      <Header/>
     </Box>
   );
 }

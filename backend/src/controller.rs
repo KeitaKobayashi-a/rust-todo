@@ -24,8 +24,8 @@ pub fn create_todo_router<T: TodoService + Send + Sync + 'static + Clone>(todo_s
         };
 
     Router::new()
-    .route("/todos", get(get_all_todos::<T>)).with_state(state)
-//     .route("/todos/{id}", get(get_todo_by_id::<T>))
+    .route("/todos", get(get_all_todos::<T>))
+    .route("/todos/{id}", get(get_todo_by_id::<T>)).with_state(state)
     }
 
 #[derive(Deserialize)]
@@ -59,5 +59,17 @@ async fn get_all_todos<T: TodoService>(
     match state.todo_service.get_all_todos().await {
         Ok(todos) => Json(todos.into_iter().map(TodoResponse::from).collect::<Vec<_>>()).into_response(),
         Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch todos").into_response(),
+    }
+}
+
+async fn get_todo_by_id<T: TodoService>(
+    State(state): State<AppState<T>>,
+    Path(id): Path<Uuid>,
+) -> impl IntoResponse {
+     println!("🟡 get_todo_by_id called with id = {}", id); 
+    match state.todo_service.get_todo_by_id(id).await {
+        Ok(Some(todo)) => Json(TodoResponse::from(todo)).into_response(),
+        Ok(None) => (StatusCode::NOT_FOUND, "Todo not found").into_response(),
+        Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch todo").into_response(),
     }
 }

@@ -37,7 +37,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .route("/", get(|| async { "Hello, Axum!!!" }))
         .nest("/api", create_todo_router(todo_service));
 
-    // ✅ サーバーの起動
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
     info!("🚀 Server running at http://{}", addr);
     let listener = TcpListener::bind(addr).await?;
