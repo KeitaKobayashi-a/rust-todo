@@ -19,13 +19,13 @@ export default function TodoItem({todo, removeTodo, toggleTodo, setIsSubmit}) {
                     deleteTodo();
                     removeTodo(todo.id)
                 }}>
-                    <DeleteIcon/>
+                    <DeleteIcon color={'error'}/>
                 </IconButton>
             }
             disablePadding
         >
             <ListItemButton role={undefined} onClick={() => toggleTodo(todo.id)}>
-                <ListItemIcon>
+                <ListItemIcon >
                     <Checkbox
                         edge="start"
                         checked={todo.completed}
