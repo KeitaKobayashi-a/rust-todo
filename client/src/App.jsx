@@ -1,6 +1,6 @@
-import Layout from "./components/Layout";
+import TemporaryDrawer from "./components/TemporaryDrawer.jsx";
 
 function App() {
-  return <Layout />;
+  return <TemporaryDrawer/>;
 }
 export default App;
