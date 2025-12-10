@@ -66,7 +66,6 @@ async fn get_todo_by_id<T: TodoService>(
     State(state): State<AppState<T>>,
     Path(id): Path<Uuid>,
 ) -> impl IntoResponse {
-     println!("🟡 get_todo_by_id called with id = {}", id); 
     match state.todo_service.get_todo_by_id(id).await {
         Ok(Some(todo)) => Json(TodoResponse::from(todo)).into_response(),
         Ok(None) => (StatusCode::NOT_FOUND, "Todo not found").into_response(),

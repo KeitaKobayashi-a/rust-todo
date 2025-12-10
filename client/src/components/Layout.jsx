@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
-import Header from "./Header"
+import ResponsiveDrawer from './ResponsiveDrawer.jsx'
 
-export default function BoxBasic() {
+export default function Layout() {
   return (
     <Box
       sx={{
@@ -12,7 +12,7 @@ export default function BoxBasic() {
         width: "100%",
       }}
     >
-      <Header/>
+      <ResponsiveDrawer/>
     </Box>
   );
 }
