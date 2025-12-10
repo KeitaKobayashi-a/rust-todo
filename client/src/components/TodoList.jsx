@@ -51,7 +51,7 @@ export default function TodoList() {
         <Box sx={{
             display: 'flex', justifyContent: 'center',
             flexDirection: 'column', alignItems: 'center',
-            m: 4
+            mb: 5
         }}>
             <Typography variant="h1" sx={{color: 'white'}}>
                 Todo
