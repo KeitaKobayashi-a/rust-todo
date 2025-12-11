@@ -37,7 +37,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let cors =
         CorsLayer::new().allow_origin(["http://localhost:5173".parse::<HeaderValue>().unwrap()]);
-    let serve_dir = ServeDir::new("../public");
+    let serve_dir = ServeDir::new("public");
 
     let app = Router::new()
         .nest("/api", create_todo_router(todo_service))
