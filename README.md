@@ -1,6 +1,6 @@
-# rust-todo
+# Rust-todo
 
-### Commit message
+### Commit message rule
 * feat: 新しい機能
 * fix: バグの修正
 * docs: ドキュメントのみの変更

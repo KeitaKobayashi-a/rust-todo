@@ -1,23 +1,24 @@
-use axum::{Router, routing::get,http::HeaderValue,};
+use axum::{Router, http::HeaderValue, routing::get};
 use dotenvy::dotenv;
 use sqlx::PgPool;
 use std::env;
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
-use tracing::{info, Level};
-use tracing_subscriber::FmtSubscriber;
 use tower_http::cors::CorsLayer;
+use tower_http::services::ServeDir;
+use tracing::{Level, info};
+use tracing_subscriber::FmtSubscriber;
 
-use crate::repository::TodoRepositoryImpl;
 use crate::controller::create_todo_router;
+use crate::repository::TodoRepositoryImpl;
 use crate::service::TodoUsecase;
 
-mod models;
-mod interface;
+mod controller;
 mod db;
+mod interface;
+mod models;
 mod repository;
 mod service;
-mod controller;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -34,10 +35,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let todo_repository = TodoRepositoryImpl::new(pool.clone());
     let todo_service = TodoUsecase::new(todo_repository);
 
-    let cors = CorsLayer::new().allow_origin(["http://localhost:5173".parse::<HeaderValue>().unwrap()]);
+    let cors =
+        CorsLayer::new().allow_origin(["http://localhost:5173".parse::<HeaderValue>().unwrap()]);
+    let serve_dir = ServeDir::new("../public");
 
     let app = Router::new()
-        .nest("/api", create_todo_router(todo_service)).layer(cors);
+        .nest("/api", create_todo_router(todo_service))
+        .layer(cors)
+        .fallback_service(serve_dir);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
     info!("🚀 Server running at http://{}", addr);
