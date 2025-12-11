@@ -102,7 +102,13 @@ async fn delete_todo<T: TodoService>(
     Path(id): Path<Uuid>,
 ) -> impl IntoResponse {
     match state.todo_service.delete_todo(id).await {
-        Ok(_) => StatusCode::NO_CONTENT.into_response(),
+        Ok(todos) => Json(
+            todos
+                .into_iter()
+                .map(TodoResponse::from)
+                .collect::<Vec<_>>(),
+        )
+            .into_response(),
         Err(sqlx::Error::RowNotFound) => (StatusCode::NOT_FOUND, "Todo not found").into_response(),
         Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Failed to delete todo").into_response(),
     }

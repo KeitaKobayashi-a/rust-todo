@@ -51,12 +51,17 @@ impl TodoRepository for TodoRepositoryImpl{
         Ok(created_todo)
     }
 
-    async fn delete(&self, id: Uuid) -> Result<(), sqlx::Error> {
+    async fn delete(&self, id: Uuid) -> Result<Vec<Todo>, sqlx::Error> {
         sqlx::query("DELETE FROM todos WHERE id = $1")
             .bind(id)
             .execute(&self.pool)
             .await?;
-        Ok(())
+        let todos = sqlx::query_as::<_, Todo>(
+            "SELECT id, title, description, completed, created_at, updated_at FROM todos")
+            .fetch_all(&self.pool)
+            .await?;
+        Ok(todos)
+
     }
 
 }
