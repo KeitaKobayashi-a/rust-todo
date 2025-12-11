@@ -92,7 +92,13 @@ async fn create_todo<T: TodoService>(
         .create_todo(payload.title, payload.description)
         .await
     {
-        Ok(todo) => (StatusCode::CREATED, Json(TodoResponse::from(todo))).into_response(),
+        Ok(todos) => Json(
+            todos
+                .into_iter()
+                .map(TodoResponse::from)
+                .collect::<Vec<_>>(),
+        )
+        .into_response(),
         Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Failed to create todo").into_response(),
     }
 }
@@ -108,7 +114,7 @@ async fn delete_todo<T: TodoService>(
                 .map(TodoResponse::from)
                 .collect::<Vec<_>>(),
         )
-            .into_response(),
+        .into_response(),
         Err(sqlx::Error::RowNotFound) => (StatusCode::NOT_FOUND, "Todo not found").into_response(),
         Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Failed to delete todo").into_response(),
     }
