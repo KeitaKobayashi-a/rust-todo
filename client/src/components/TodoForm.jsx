@@ -5,7 +5,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import {Create} from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 
-export default function TodoForm({addTodo, setIsSubmit}) {
+export default function TodoForm({addTodo, setTodos}) {
     const [text, setText] = useState("");
     const handleChange = (evt) => setText(evt.target.value);
     const handleSubmit = async (evt) => {
@@ -19,13 +19,14 @@ export default function TodoForm({addTodo, setIsSubmit}) {
             }, body:
                 JSON.stringify({title: text, description: 'not use'})
         })
-        setIsSubmit(pre => !pre)
+        const json = await data.json();
+        setTodos(json)
 
     }
 
     return (
-        <ListItem >
-            <form onSubmit={handleSubmit}style={{ width: "80%" }}>
+        <ListItem>
+            <form onSubmit={handleSubmit} style={{width: "80%"}}>
                 <TextField
                     id="outlined-basic"
                     label="new Todo"

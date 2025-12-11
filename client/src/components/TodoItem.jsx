@@ -6,11 +6,13 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function TodoItem({todo, removeTodo, toggleTodo, setIsSubmit}) {
+export default function TodoItem({todo, removeTodo, toggleTodo, setTodos}) {
     const labelId = `checkbox-list-label-${todo.id}`;
     const deleteTodo = async () => {
-        await fetch(`/api/todos/${todo.id}`, {method: 'DELETE'})
-        setIsSubmit(pre => !pre)
+        const data = await fetch(`/api/todos/${todo.id}`, {method: 'DELETE'});
+        const json = await data.json();
+        setTodos(json);
+
     }
     return (
         <ListItem
@@ -39,7 +41,7 @@ export default function TodoItem({todo, removeTodo, toggleTodo, setIsSubmit}) {
                         fontSize: 32,
                         fontWeight: 600,
                     },
-                }}  sx={todo.completed ? {color: '#00a6ed', textDecoration: "line-through"}:{color: 'white'}}/>
+                }} sx={todo.completed ? {color: '#00a6ed', textDecoration: "line-through"} : {color: 'white'}}/>
             </ListItemButton>
         </ListItem>
 
