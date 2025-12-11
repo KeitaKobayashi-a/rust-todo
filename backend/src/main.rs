@@ -44,7 +44,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .layer(cors)
         .fallback_service(serve_dir);
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let port: u16 = env::var("PORT").unwrap_or_else(|_| "3000".to_string()).parse()?;
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
     info!("🚀 Server running at http://{}", addr);
     let listener = TcpListener::bind(addr).await?;
     axum::serve(listener, app.into_make_service()).await?;
